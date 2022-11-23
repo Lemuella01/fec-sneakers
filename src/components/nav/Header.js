@@ -1,22 +1,21 @@
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import logo from "../../image/logo.svg";
-import {AiOutlineShoppingCart} from 'react-icons/ai'
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import avatar from "../../image/image-avatar.png";
-import "../style.css"
+import "../style.css";
 import menu from "../../image/icon-menu.svg";
 import close from "../../image/icon-close.svg";
-import Cart from "./Cart"
+import Cart from "./Cart";
 import { UserContext } from "../UserContext";
-
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
-  const {quantity} = useContext(UserContext)
+  const { quantity } = useContext(UserContext);
 
   return (
     <div>
-    <header className="relative flex item-center justify-between p-8 border-b border-slate-400 max-w-6xl mx-auto"  >
+      <header className="relative flex item-center justify-between p-5 border-b border-slate-400 max-w-5xl mx-auto">
         <div className="flex items-center justify-start gap-4">
           <ul className="flex items-center justify-start gap-4">
             {!isOpen && (
@@ -34,7 +33,7 @@ const Header = () => {
             </li>
           </ul>
 
-          <nav className={isOpen && "open "} >
+          <nav className={isOpen ? "open": ""}>
             <ul className="list-items">
               <li>Collections</li>
               <li>Men</li>
@@ -47,18 +46,15 @@ const Header = () => {
 
         <div>
           <ul className="flex items-center justify-start gap-4">
-          
             <li>
-           
-              
               <button onClick={() => setCartIsOpen(!cartIsOpen)}>
-                <AiOutlineShoppingCart  className="text-xl   text-black-600" />
-                
+                <AiOutlineShoppingCart className=" text-xl  text-black-600" />
               </button>
-            <sup className=" text-sm text-white bg-orange-500 px-1 rounded-full "  >
-                {quantity}
-              </sup>
-            
+              {quantity > 0 && (
+                <sup className=" text-sm text-white bg-orange-500 px-1 rounded-full ">
+                  {quantity}
+                </sup>
+              )}
             </li>
             <li>{cartIsOpen && <Cart />}</li>
             <li>
@@ -66,8 +62,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
-      
-    </header>
+      </header>
     </div>
   );
 };

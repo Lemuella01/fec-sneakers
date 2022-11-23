@@ -20,7 +20,9 @@ nav {
   z-index: 99;
   transition: all 0.3s ease-in-out;
 }
-
+.cart{
+  z-index:1000;
+}
 nav.open {
   top: 0;
   left: 0;
@@ -42,6 +44,8 @@ nav ul li {
   z-index: 999;
 
 }
+
+
 
 .list-items > li{
  @apply hover:text-slate-400

@@ -2,17 +2,28 @@ import React, { useState } from "react";
 import { data } from "../data/data";
 import Article from "./Article";
 import Header from "./Header";
-import "../style.css"
+import "../style.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+
+const SlideButton = ({children, onClick}) => {
+  return (
+    <li>
+    <button
+      onClick={onClick}
+      className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 "
+    >
+      {children}
+    </button>
+  </li>
+  )
+}
 
 
 const Main = () => {
   const [products] = useState(data);
   const [value, setValue] = useState(0);
   const [slideIndex, setSlideIndex] = useState(1);
- 
-
- 
 
   const { mainImage } = products[value];
 
@@ -35,7 +46,7 @@ const Main = () => {
   return (
     <div>
       <Header />
-      <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-1 lg:place-items-center lg:py-16 lg:px-20 ">
+      <section className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:place-items-center lg:py-16 ">
         <article>
           <div className="lg:hidden">
             {products.map((item, index) => (
@@ -50,45 +61,43 @@ const Main = () => {
                 />
 
                 <ul className="lg:hidden">
-                  <li>
+                  <SlideButton onClick={previousSlide}>
+                    <FaChevronLeft />
+                  </SlideButton>
+                  <SlideButton onClick={nextSlide}>
+                    <FaChevronRight />
+                  </SlideButton>
+                  {/* <li>
                     <button
                       onClick={previousSlide}
                       className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 "
                     >
                       <FaChevronLeft />
                     </button>
-                  </li>
+                  </li> */}
 
-                  <li>
+                  {/* <li>
                     <button
                       onClick={nextSlide}
                       className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2"
                     >
                       <FaChevronRight />
                     </button>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             ))}
           </div>
 
-
           <div className="hidden lg:block">
-          
-                <img
-                  className="w-/12 lg:rounded-2xl cursor-pointer"
-                  src={mainImage}
-                  alt=""
-                />
+            <img
+              className="w-/12 lg:rounded-2xl cursor-pointer"
+              src={mainImage}
+              alt=""
+            />
+          </div>
 
-               
-              </div>
-            
-         
-
-          
-
-          <ul className="hidden lg:flex items-center justify-start gap-5 flex-wrap mt-5">
+          <ul className="hidden lg:flex items-center justify-start gap-12 flex-wrap mt-5">
             {products.map((item, index) => (
               <li
                 key={item.id}
